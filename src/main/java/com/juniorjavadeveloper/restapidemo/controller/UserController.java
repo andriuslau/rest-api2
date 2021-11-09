@@ -1,5 +1,6 @@
 package com.juniorjavadeveloper.restapidemo.controller;
 
+import com.juniorjavadeveloper.restapidemo.model.CountDTO;
 import com.juniorjavadeveloper.restapidemo.model.User;
 import com.juniorjavadeveloper.restapidemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,5 +62,10 @@ public class UserController {
             @PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<CountDTO> getCount() {
+        return ResponseEntity.ok(userService.getUserCount());
     }
 }

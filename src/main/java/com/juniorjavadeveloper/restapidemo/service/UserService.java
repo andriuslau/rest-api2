@@ -2,6 +2,7 @@ package com.juniorjavadeveloper.restapidemo.service;
 
 import com.juniorjavadeveloper.restapidemo.exception.DataExistException;
 import com.juniorjavadeveloper.restapidemo.exception.UserNotFoundException;
+import com.juniorjavadeveloper.restapidemo.model.CountDTO;
 import com.juniorjavadeveloper.restapidemo.model.User;
 import com.juniorjavadeveloper.restapidemo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void deleteUserById(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException("User not found");
+        }
+        userRepository.deleteById(id);
+    }
+
+    public CountDTO getUserCount() {
+        return new CountDTO(userRepository.count());
+    }
+
     private void checkIfEmailExist(String email) {
         if (userRepository.existsByEmailIgnoreCase(email)) {
             throw new DataExistException("User with this email already exist.");
@@ -42,12 +54,5 @@ public class UserService {
         if (userRepository.existsByUserNameIgnoreCase(userName)) {
             throw new DataExistException("This username isn't available. Please try another.");
         }
-    }
-
-    public void deleteUserById(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User not found");
-        }
-        userRepository.deleteById(id);
     }
 }
