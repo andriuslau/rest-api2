@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI openAPIConfiguration() {
         return new OpenAPI()
                 .components(new Components())
                 .info(appInfo());
