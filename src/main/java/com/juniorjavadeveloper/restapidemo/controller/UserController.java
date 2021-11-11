@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("/api")
+@RequestMapping("/api/v1/users")
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "user", description = "The user API")
+@Tag(name = "user", description = "User controller API")
 public class UserController {
 
     private final UserService userService;
@@ -46,7 +46,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User doesn't exist",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDetails.class))})
     })
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> findUser(
             @Parameter(description = "Id to retrieve user") @PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.findUserById(id));
@@ -57,7 +57,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved user list.",
             content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))})
     })
-    @GetMapping("users")
+    @GetMapping("")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.findAllUsers());
     }
@@ -68,7 +68,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User doesn't exist",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDetails.class))})
     })
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(
             @Parameter(description = "Id to delete user") @PathVariable("id") Long id) {
         userService.deleteUserById(id);

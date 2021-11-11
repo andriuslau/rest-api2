@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -46,6 +47,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Schema(example = "MALE")
     @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
