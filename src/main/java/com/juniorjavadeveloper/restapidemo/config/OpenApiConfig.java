@@ -26,8 +26,8 @@ public class OpenApiConfig {
 
     private Info appInfo() {
         return new Info()
-                .title("From Zero to Junior")
-                .description("Simple Spring Boot Rest API application - from Zero to Junior.")
+                .title("From Zero to Java Junior")
+                .description("Simple Spring Boot Rest API application - from Zero to Java Junior.")
                 .version("0.1")
                 .contact(contactInfo());
     }
